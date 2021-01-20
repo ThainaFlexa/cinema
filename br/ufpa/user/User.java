@@ -37,4 +37,15 @@ public abstract class User implements Authenticable {
 		// Fake authentication for users
 		return true;
 	}
+	
+	public boolean validate() {
+		return name != "" &&
+			login != "" &&
+			password != "";
+	}
+
+	@Override
+	public String toString() {
+		return name + " (" + login + ")";
+	}
 }

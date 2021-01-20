@@ -27,7 +27,7 @@ class SaleTest {
 	
 	@Test
 	void addProductsToSale() {
-		Ticket ticket = new Ticket(1, 23.0);
+		Ticket ticket = new Ticket(1, 23.0, "Os Vingadores");
 		Snack snack = new Snack(2, 18.99);
 		
 		sale.addProduct(ticket);
@@ -38,7 +38,7 @@ class SaleTest {
 	
 	@Test
 	void removeProductsFromSale() {
-		Ticket ticket = new Ticket(1, 23.0);
+		Ticket ticket = new Ticket(1, 23.0, "Os Vingadores");
 		Snack snack = new Snack(2, 18.99);
 		
 		sale.addProduct(ticket);
@@ -50,7 +50,7 @@ class SaleTest {
 
 	@Test
 	void finishSale() {
-		Ticket ticket = new Ticket(1, 23.9);
+		Ticket ticket = new Ticket(1, 23.9, "Os Vingadores");
 		
 		sale.addProduct(ticket);
 		
@@ -68,7 +68,7 @@ class SaleTest {
 	
 	@Test
 	void calculateTotalPrice() {
-		Ticket ticket = new Ticket(1, 23.0);
+		Ticket ticket = new Ticket(1, 23.0, "Os Vingadores");
 		Snack snack = new Snack(2, 27.0);
 		
 		sale.addProduct(ticket);

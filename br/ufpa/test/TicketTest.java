@@ -12,7 +12,7 @@ class TicketTest {
 
 	@BeforeAll
 	static void setup() {
-		ticket = new Ticket(1, 20.0);
+		ticket = new Ticket(1, 20.0, "Os Vingadores");
 		ticket.setPromotionalCode("BLACKFRIDAY");
 	}
 

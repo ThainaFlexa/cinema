@@ -54,4 +54,16 @@ public class Sale extends Transaction {
 		// Fake successful sale process finish.
 		return !products.isEmpty();
 	}
+
+	@Override
+	public String toString() {
+		String output = "Cliente: "
+				+ customer.getName();
+		
+		for(Product product : products) {
+			output += "\n\t" + product;
+		}
+		
+		return output;
+	}
 }

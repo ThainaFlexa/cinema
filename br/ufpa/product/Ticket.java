@@ -4,10 +4,12 @@ import java.util.*;
 
 public class Ticket extends Product {
 	private String promotionalCode;
+	private String movie;
 	private ArrayList<String> validPromotionalCodes = new ArrayList<>();
 
-	public Ticket(int code, double price) {
-		super(code, price);
+	public Ticket(int code, double price, String movie) {
+		super(code, price, "ticket");
+		this.movie = movie;
 		
 		this.validPromotionalCodes.addAll(new ArrayList<>(
 				Arrays.asList("BLACKFRIDAY", "TOTAL10CINE")
@@ -20,6 +22,10 @@ public class Ticket extends Product {
 
 	public void setPromotionalCode(String promotionalCode) {
 		this.promotionalCode = promotionalCode;
+	}
+	
+	public String getMovie() {
+		return movie;
 	}
 	
 	public boolean validatePromotionalCode(String promotionalCode) {

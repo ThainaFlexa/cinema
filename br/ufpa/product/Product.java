@@ -1,20 +1,21 @@
 package br.ufpa.product;
 
+import java.text.NumberFormat;
+
 public abstract class Product {
 	private int code;
 	private double price;
+	private String description;
 	
-	public Product(int code, double price) {
+	public Product(int code, double price, String description) {
 		super();
 		this.code = code;
 		this.price = price;
+		this.description = description;
 	}
 	
 	public double getPrice() {
 		return price;
-	}
-	public void setPrice(double price) {
-		this.price = price;
 	}
 
 	@Override
@@ -39,4 +40,11 @@ public abstract class Product {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		NumberFormat formatter = NumberFormat.getCurrencyInstance();
+		String formattedPrice = formatter.format(price);
+		
+		return code + " - " + description + " -> " + formattedPrice;
+	}
 }
