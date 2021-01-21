@@ -1,5 +1,6 @@
 package br.ufpa.product;
 
+import java.text.NumberFormat;
 import java.util.*;
 
 public class Ticket extends Product {
@@ -31,5 +32,19 @@ public class Ticket extends Product {
 	public boolean validatePromotionalCode(String promotionalCode) {
 		// Fake validation of promotional code:
 		return validPromotionalCodes.contains(promotionalCode);
+	}
+
+	@Override
+	public String toString() {
+		NumberFormat formatter = NumberFormat.getCurrencyInstance();
+		String formattedPrice = formatter.format(price);
+		
+		String output = "\tCódigo: " + code + " -> " + formattedPrice + "\n\tFilme: " + movie;
+		
+		if(promotionalCode != null) {
+			output += " (código promocional: " + promotionalCode + ")";
+		}
+		 
+		 return output + "\n\n";
 	}
 }

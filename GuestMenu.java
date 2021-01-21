@@ -1,13 +1,11 @@
-import br.ufpa.user.User;
-
 public class GuestMenu extends Menu {
 
 	public GuestMenu() {
 		super(new String[]{
 				"1 - Criar usuário",
 				"2 - Fazer login",
-				"0 - Sair"
-			}, "Menu do visitante");
+				"0 - Finalizar"
+			}, "Menu do VISITANTE");
 	}
 	
 	@Override
@@ -15,9 +13,7 @@ public class GuestMenu extends Menu {
 		switch(choice) {
 			case 1: 
 				try {
-					User createdUser = SignUp.signup();
-					Storage.users.add(createdUser);
-					System.out.println("Usuário " + createdUser.getName() + " criado com sucesso!");
+					SignUp.signup();
 				} catch(Exception e) {
 					System.out.println(e.getMessage());
 					processChoice(choice);
@@ -28,13 +24,9 @@ public class GuestMenu extends Menu {
 				try {
 					Storage.authenticatedUser = Login.authenticate(); 
 				} catch(Exception e) {
-					System.out.println("Ocorreu um erro ao fazer login. Tente novamente.");
+					System.out.println(e.getMessage());
 					processChoice(choice);
 				}
-				break;
-				
-			case 0: 
-				System.exit(0);
 				break;
 		}
 	}

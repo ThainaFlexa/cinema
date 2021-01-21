@@ -28,7 +28,7 @@ class SaleTest {
 	@Test
 	void addProductsToSale() {
 		Ticket ticket = new Ticket(1, 23.0, "Os Vingadores");
-		Snack snack = new Snack(2, 18.99);
+		Snack snack = new Snack(2, 18.99, "Batata Frita");
 		
 		sale.addProduct(ticket);
 		sale.addProduct(snack);
@@ -39,7 +39,7 @@ class SaleTest {
 	@Test
 	void removeProductsFromSale() {
 		Ticket ticket = new Ticket(1, 23.0, "Os Vingadores");
-		Snack snack = new Snack(2, 18.99);
+		Snack snack = new Snack(2, 18.99, "Batata Frita");
 		
 		sale.addProduct(ticket);
 		sale.addProduct(snack);
@@ -69,7 +69,7 @@ class SaleTest {
 	@Test
 	void calculateTotalPrice() {
 		Ticket ticket = new Ticket(1, 23.0, "Os Vingadores");
-		Snack snack = new Snack(2, 27.0);
+		Snack snack = new Snack(2, 27.0, "Batata Frita");
 		
 		sale.addProduct(ticket);
 		sale.addProduct(snack);

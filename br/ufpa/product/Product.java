@@ -3,9 +3,10 @@ package br.ufpa.product;
 import java.text.NumberFormat;
 
 public abstract class Product {
-	private int code;
-	private double price;
-	private String description;
+	protected int code;
+	protected double price;
+	protected String description;
+	protected boolean available = true;
 	
 	public Product(int code, double price, String description) {
 		super();
@@ -16,6 +17,28 @@ public abstract class Product {
 	
 	public double getPrice() {
 		return price;
+	}
+	
+	public String getFormattedPrice() {
+		NumberFormat formatter = NumberFormat.getCurrencyInstance();
+		String formattedPrice = formatter.format(price);
+		return formattedPrice;
+	}
+	
+	public int getCode() {
+		return code;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public boolean isAvailable() {
+		return available;
+	}
+	
+	public void setAvailable(boolean available) {
+		this.available = available;
 	}
 
 	@Override
@@ -45,6 +68,6 @@ public abstract class Product {
 		NumberFormat formatter = NumberFormat.getCurrencyInstance();
 		String formattedPrice = formatter.format(price);
 		
-		return code + " - " + description + " -> " + formattedPrice;
+		return "\t" + code + " - " + description + " -> " + formattedPrice + "\n";
 	}
 }

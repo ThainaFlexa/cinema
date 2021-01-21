@@ -7,25 +7,25 @@ import br.ufpa.user.User;
 public class SignUp {
 	private static Scanner input = new Scanner(System.in);
 	
-	public static User signup() throws Exception {
-		System.out.print("Perfil (gestor ou cliente): ");
-		String profile = input.next();
+	public static void signup() throws Exception {
+		System.out.print("\nPerfil (gestor ou cliente): ");
+		String profile = input.nextLine();
 		
 		while(!Storage.profiles.contains(profile)) {
-			System.out.print("Este perfil não existe. Digite gestor ou cliente: ");
-			profile = input.next();
+			System.out.print("\nEste perfil não existe. Digite 'gestor' ou 'cliente': ");
+			profile = input.nextLine();
 		}
 		
-		System.out.print("Nome: ");
-		String name = input.next();
+		System.out.print("\nNome: ");
+		String name = input.nextLine();
 		
-		System.out.print("Login: ");
-		String login = input.next();
+		System.out.print("\nLogin: ");
+		String login = input.nextLine();
 		
 		System.out.print("\nSenha: ");
-		String password = input.next();
+		String password = input.nextLine();
 		
-		User user;
+		User user = null;
 		
 		switch(profile) {
 			case "gestor":
@@ -34,16 +34,14 @@ public class SignUp {
 			case "cliente":
 				user = new Customer(name, login, password);
 				break;
-			default:
-				return null;
 		}
 		
-		if(user.validate()) {
+		if(user != null && user.validate()) {
 			Storage.users.add(user);
+			
+			System.out.println("\nUsuário " + user.getName() + " criado com sucesso!");
 		} else {
-			throw new Exception("Ocorreu um erro ao criar o usuário. Tente novamente.");
+			throw new Exception("\nOcorreu um erro ao criar o usuário. Tente novamente.");
 		}
-		
-		return user;
 	}
 }

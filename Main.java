@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 import br.ufpa.user.Customer;
 import br.ufpa.user.Manager;
-import br.ufpa.user.User;
 
 public class Main {
 	private static Scanner input = new Scanner(System.in);
@@ -16,7 +15,7 @@ public class Main {
 		int choice = input.nextInt();
 		
 		while(!menu.validateOption(choice)) {
-			System.out.println("Opção inválida! Tente novamente.\n");
+			System.out.println("\nOpção inválida! Tente novamente.\n");
 			choice = input.nextInt();
 		}
 
@@ -41,6 +40,9 @@ public class Main {
 			System.out.println("\n");
 		} while(userChoice != 0);
 		
-		System.out.println("\nPrograma finalizado!");
+		System.out.println("=======================");
+		System.out.println("Programa finalizado!");
+		System.out.println("=======================");
+		System.exit(0);
 	}
 }

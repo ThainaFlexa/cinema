@@ -1,5 +1,6 @@
 package br.ufpa.transaction;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import br.ufpa.product.Product;
@@ -20,13 +21,27 @@ public class Sale extends Transaction {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-
-	@Override
-	public boolean authenticate() {
-		// Fake authentication for sales checkout
-		return true;
+	
+	public String getFormattedTotal() {
+		double total = products.stream()
+				.map(i -> i.getPrice())
+				.mapToDouble(Double::valueOf)
+				.sum();
+		
+		NumberFormat formatter = NumberFormat.getCurrencyInstance();
+		String formattedTotal = formatter.format(total);
+		return formattedTotal;
 	}
 	
+	public double getTotal() {
+		double total = products.stream()
+				.map(i -> i.getPrice())
+				.mapToDouble(Double::valueOf)
+				.sum();
+		
+		return total;
+	}
+
 	public void addProduct(Product product) {
 		this.products.add(product);
 	}

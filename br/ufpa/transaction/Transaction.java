@@ -1,10 +1,9 @@
 package br.ufpa.transaction;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-import br.ufpa.user.Authenticable;
-
-public abstract class Transaction implements Authenticable {
+public abstract class Transaction {
 	private LocalDateTime dateTime;
 	
 	public Transaction() {
@@ -14,8 +13,8 @@ public abstract class Transaction implements Authenticable {
 	
 	public abstract boolean finish();
 	
-	public LocalDateTime getDateTime() {
-		return dateTime;
+	public String getFormattedDateTime() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		return dateTime.format(formatter);
 	}
-	
 }
