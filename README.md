@@ -1,6 +1,6 @@
 ## PROGRAMAÇÃO DE COMPUTADORES II
 
-<p style="font-size: 16px">Aluna: <b>Thainá Flexa</b></p>
+<p style="font-size: 16px">Alunos: <b>Thainá Flexa</b></p><b>Marcus Kenjiro</b></p>
 
 ### Trabalho final
 
