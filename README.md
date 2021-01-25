@@ -8,6 +8,6 @@ Este trabalho aplica os principais conceitos da orientação da objetos através
 
 O projeto conta com testes unitários feitos com **JUnit 5**.
 
-Dentre as funcionalidades implementadas, está o cadastro e autenticação (fake) de usuários, cadastro de produtos (ingresso e lanche), compra de ingresso com com código promocional, etc.
+Dentre as funcionalidades implementadas, está o cadastro e autenticação (fake) de usuários com perfil, gerenciamento de carrinho de compras, relatórios simples, etc.
 
 A interação com o sistema se dá via terminal.
