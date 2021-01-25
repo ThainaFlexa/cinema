@@ -1,8 +1,11 @@
 import java.text.NumberFormat;
+import java.util.Scanner;
 
 import br.ufpa.transaction.Sale;
+import br.ufpa.user.User;
 
-public class ManagerMenu extends Menu {
+class ManagerMenu extends Menu {
+	private Scanner input = new Scanner(System.in);
 
 	public ManagerMenu() {
 		super(new String[]{
@@ -19,7 +22,7 @@ public class ManagerMenu extends Menu {
 			case 1: 
 				try {
 					if(Storage.sales.size() == 0) {
-						System.out.println("\nNenhuma venda realizada até o momento.");
+						throw new Exception("\nNenhuma venda realizada até o momento.");
 					} else {
 						String itemFormat = "| %-20s | %-20s | %-11s |%n";
 						String totalFormat = "| %-43s | %-11s |%n";
@@ -48,17 +51,31 @@ public class ManagerMenu extends Menu {
 						System.out.format("+---------------------------------------------+-------------+%n");	
 					}
 				} catch(Exception e) {
-					System.out.println(e.getMessage());
+					System.out.println("\n" + e.getMessage() + "\n");
 					processChoice(choice);
 				}
 				break;
 			
 			case 2: 
-				try {
-					System.out.println("\nUsuários cadastrados ===================");
-					Storage.users.forEach(user -> System.out.print(user + "\n"));
+				try {		
+					if(Storage.users.size() == 0) {
+						throw new Exception("\nNenhum usuário cadastrado.");
+					} else {
+						String itemFormat = "| %-26s | %-20s |%n";
+	
+						System.out.println("\nUsuários cadastrados:\n");
+						System.out.format("+----------------------------+----------------------+%n");
+						System.out.format("| Usuário                    | Login                |%n");
+						System.out.format("+----------------------------+----------------------+%n");
+						
+						for(User user: Storage.users) {
+					    	System.out.format(itemFormat, user.getName(), user.getLogin());
+					    }
+						
+						System.out.format("+----------------------------+----------------------+%n");
+					}
 				} catch(Exception e) {
-					System.out.println(e.getMessage());
+					System.out.println("\n" + e.getMessage() + "\n");
 					processChoice(choice);
 				}
 				break;
@@ -67,6 +84,9 @@ public class ManagerMenu extends Menu {
 				Login.logout();
 				break;
 		}
+		
+		System.out.print("\nPressione Enter para continuar...");
+		input.nextLine();
 	}
 }
 

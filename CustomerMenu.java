@@ -1,17 +1,20 @@
 import java.text.NumberFormat;
+import java.util.Scanner;
 
 import br.ufpa.product.Product;
 import br.ufpa.product.Ticket;
 
-public class CustomerMenu extends Menu {
+class CustomerMenu extends Menu {
+	private Scanner input = new Scanner(System.in);
 
 	public CustomerMenu() {
 		super(new String[]{
 				"1 - Comprar ingresso",
 				"2 - Comprar lanche",
 				"3 - Ver carrinho",
-				"4 - Finalizar venda",
-				"5 - Logout",
+				"4 - Remover do carrinho",
+				"5 - Finalizar venda",
+				"6 - Logout",
 				"0 - Finalizar"
 			}, "Menu do CLIENTE");
 	}
@@ -22,34 +25,33 @@ public class CustomerMenu extends Menu {
 			case 1: 
 				try {
 					if(Storage.tickets.size() == 0) {
-						System.out.println("\nNão há ingressos disponíveis.");
+						throw new Exception("\nNão há ingressos disponíveis.");
 					} else {
 						Selling.addToCart("ticket");
 					}
 				} catch(Exception e) {
-					System.out.println(e.getMessage());
-					processChoice(choice);
+					String message = e.getMessage() != null ? e.getMessage() : "Código não encontrado!"; 
+					System.out.println("\n" + message + "\n");
 				}
 				break;
 			
 			case 2: 
 				try {
 					if(Storage.snacks.size() == 0) {
-						System.out.println("\nNão há lanches disponíveis.");
+						throw new Exception("\nNão há lanches disponíveis.");
 					} else {
 						Selling.addToCart("snack");
 					}
 				} catch(Exception e) {
-					System.out.println(e.getMessage());
-					processChoice(choice);
+					String message = e.getMessage() != null ? e.getMessage() : "Código não encontrado!"; 
+					System.out.println("\n" + message + "\n");
 				}
 				break;
 				
 			case 3: 
 				try {
 					if(Storage.sale.getProducts().size() == 0) {
-						System.out.println("\nNenhum item adicionado ao seu carrinho!");
-						break;
+						throw new Exception("\nNenhum item adicionado ao seu carrinho!");
 					}
 					
 					String itemFormat = "| %-6d | %-32s | %-10s |%n";
@@ -61,14 +63,10 @@ public class CustomerMenu extends Menu {
 					System.out.format("+--------+----------------------------------+------------+%n");
 					
 					for(Product product : Storage.sale.getProducts()) {
-						String description;
-						
-						if(product.getClass() == Ticket.class) {
-							description = "Ingresso: " + ((Ticket) product).getMovie();
-						} else {
-							description = product.getDescription();
-						}
-								
+						String description = (product.getClass() == Ticket.class) ? 
+								"Ingresso: " + ((Ticket) product).getMovie() : 
+								product.getDescription();
+														
 				    	System.out.format(itemFormat, product.getCode(), description, product.getFormattedPrice());
 				    }
 					
@@ -86,21 +84,36 @@ public class CustomerMenu extends Menu {
 					
 					System.out.format("+-------------------------------------------+------------+%n");
 				} catch(Exception e) {
-					System.out.println(e.getMessage());
-				}
-				break;
-			
-			case 4: 
-				try {
-					Selling.sell();
-				} catch(Exception e) {
-					System.out.println(e.getMessage());
+					System.out.println("\n" + e.getMessage() + "\n");
 				}
 				break;
 				
+			case 4:
+				try {
+					if(Storage.sale.getProducts().size() == 0) {
+						throw new Exception("\nNenhum item adicionado ao seu carrinho!");
+					} else {
+						Selling.removeFromCart("ticket");
+					}
+				} catch(Exception e) {
+					System.out.println("\n" + e.getMessage() + "\n");
+				}
+				break;
+			
 			case 5: 
+				try {
+					Selling.sell();
+				} catch(Exception e) {
+					System.out.println("\n" + e.getMessage() + "\n");
+				}
+				break;
+				
+			case 6: 
 				Login.logout();
 				break;
 		}
+		
+		System.out.print("\nPressione Enter para continuar...");
+		input.nextLine();
 	}
 }

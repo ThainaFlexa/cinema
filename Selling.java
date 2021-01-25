@@ -5,7 +5,7 @@ import br.ufpa.product.Ticket;
 import br.ufpa.transaction.Sale;
 import br.ufpa.user.Customer;
 
-public class Selling {
+class Selling {
 	private static Scanner input = new Scanner(System.in);
 	
 	public static void addToCart(String product) throws Exception {
@@ -18,6 +18,21 @@ public class Selling {
 				addSnackToCart();
 				break;
 		}
+	}
+	
+	public static void removeFromCart(String product) throws Exception {
+		int code;
+		
+		System.out.print("\nInforme o código do item para remover: ");
+		code = input.nextInt();
+	
+		boolean removed = Storage.sale.removeProduct(code);
+		
+		if(!removed) {
+			throw new Exception("Este item não consta em seu carrinho!");
+		} else {
+			System.out.print("\nItem removido do carrinho!\n");
+		}		
 	}
 
 	private static void addSnackToCart() throws Exception {
@@ -48,7 +63,7 @@ public class Selling {
 			    orElse(null);
 		
 		if(snack == null) {
-			throw new Exception("\nLanche indisponível! Tente novamente.");
+			throw new Exception("\nLanche indisponível!");
 		}
 		
 		snack.setAvailable(false);
@@ -84,7 +99,7 @@ public class Selling {
 			    .orElse(null);
 		
 		if(ticket == null) {
-			throw new Exception("\nIngresso indisponível! Tente novamente.");
+			throw new Exception("\nIngresso indisponível!");
 		}
 		
 		ticket.setAvailable(false);
@@ -94,15 +109,21 @@ public class Selling {
 		System.out.print("\nIngresso adicionado ao carrinho!\n");
 	}
 	
-	public static void sell() {
+	public static void sell() throws Exception {
 		if(Storage.sale.getProducts().size() > 0) {
-			Storage.sales.add(Storage.sale);
-
-			System.out.print("\nVenda finalizada! Obrigado!\n");	
+			boolean finished = Storage.sale.finish();
 			
-			Storage.sale = new Sale((Customer) Storage.authenticatedUser);
+			if(finished) {
+				Storage.sales.add(Storage.sale);
+
+				System.out.print("\nVenda finalizada! Obrigado!\n");	
+				
+				Storage.sale = new Sale((Customer) Storage.authenticatedUser);
+			} else {
+				throw new Exception("Houve um erro ao finalizar a venda!");
+			}
 		} else {
-			System.out.print("\nNão há nenhum produto em seu carrinho!\n");
+			throw new Exception("Não há nenhum produto em seu carrinho!");
 		}
 	}
 }

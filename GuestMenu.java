@@ -1,4 +1,4 @@
-public class GuestMenu extends Menu {
+class GuestMenu extends Menu {
 
 	public GuestMenu() {
 		super(new String[]{
@@ -15,7 +15,7 @@ public class GuestMenu extends Menu {
 				try {
 					SignUp.signup();
 				} catch(Exception e) {
-					System.out.println(e.getMessage());
+					System.out.println("\n" + e.getMessage());
 					processChoice(choice);
 				}
 				break;
@@ -24,7 +24,7 @@ public class GuestMenu extends Menu {
 				try {
 					Storage.authenticatedUser = Login.authenticate(); 
 				} catch(Exception e) {
-					System.out.println(e.getMessage());
+					System.out.println("\n" + e.getMessage());
 					processChoice(choice);
 				}
 				break;

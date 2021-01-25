@@ -43,7 +43,7 @@ class SaleTest {
 		
 		sale.addProduct(ticket);
 		sale.addProduct(snack);
-		sale.removeProduct(ticket);
+		sale.removeProduct(ticket.getCode());
 		
 		Assertions.assertEquals(sale.getProducts().size(), 1);
 	}

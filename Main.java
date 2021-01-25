@@ -3,14 +3,14 @@ import java.util.Scanner;
 import br.ufpa.user.Customer;
 import br.ufpa.user.Manager;
 
-public class Main {
+class Main {
 	private static Scanner input = new Scanner(System.in);
 	private static GuestMenu guestMenu = new GuestMenu();
 	private static CustomerMenu customerMenu = new CustomerMenu();
 	private static ManagerMenu managerMenu = new ManagerMenu();
 	
 	private static int printMenu(Menu menu) {
-		System.out.println(menu);
+		menu.print();
 		
 		int choice = input.nextInt();
 		
@@ -37,7 +37,7 @@ public class Main {
 				guestMenu.processChoice(userChoice);
 			}
 			
-			System.out.println("\n");
+			System.out.print("\n");
 		} while(userChoice != 0);
 		
 		System.out.println("=======================");

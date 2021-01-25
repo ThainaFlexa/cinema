@@ -9,8 +9,9 @@ import br.ufpa.user.User;
 
 // Esta classe simula o banco de dados da aplicação.
 
-public class Storage {
+class Storage {
 	public static ArrayList<User> users = new ArrayList<>();
+	public static ArrayList<String> profiles = new ArrayList<>();
 	public static ArrayList<Sale> sales = new ArrayList<>();
 	public static ArrayList<Ticket> tickets = new ArrayList<>();
 	public static ArrayList<Snack> snacks = new ArrayList<>();
@@ -18,7 +19,10 @@ public class Storage {
 	public static User authenticatedUser;
 	
 	static {
-		users.add(new Manager("Felipe", "gestor", "123456"));
+		profiles.add("gestor");
+		profiles.add("cliente");
+		
+		users.add(new Manager("Marcus", "gestor", "123456"));
 		users.add(new Customer("Thaina", "cliente", "123456"));
 		
 		Ticket[] availableTickets = new Ticket[]{
@@ -45,12 +49,17 @@ public class Storage {
 		for(int i = 0; i < availableSnacks.length; i++) {
 			snacks.add(availableSnacks[i]);
 		}
+		
+		Sale firstSale = new Sale((Customer) users.get(1));
+		firstSale.addProduct(availableTickets[0]);
+		firstSale.addProduct(availableSnacks[1]);
+		firstSale.addProduct(availableSnacks[4]);
+		sales.add(firstSale);
+		
+		Sale secondSale = new Sale((Customer) users.get(1));
+		secondSale.addProduct(availableTickets[2]);
+		secondSale.addProduct(availableSnacks[2]);
+		secondSale.addProduct(availableSnacks[5]);
+		sales.add(secondSale);
     }
-	
-	@SuppressWarnings("serial")
-	public static ArrayList<String> profiles = new ArrayList<>(){{
-	    add("gestor");
-	    add("cliente");
-	}};
-	
 }

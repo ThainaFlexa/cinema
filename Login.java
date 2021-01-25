@@ -4,13 +4,13 @@ import br.ufpa.transaction.Sale;
 import br.ufpa.user.Customer;
 import br.ufpa.user.User;
 
-public class Login {
+class Login {
 	private static Scanner input = new Scanner(System.in);
 	
 	public static User authenticate() throws Exception {
 		System.out.print("\nLogin: ");
 		String login = input.next();
-
+		
 		User finded = Storage.users.stream()
 				  .filter(user -> login.equals(user.getLogin()))
 				  .findAny()

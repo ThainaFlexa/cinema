@@ -1,4 +1,4 @@
-public abstract class Menu {
+abstract class Menu {
 	public String[] options;
 	public String title;
 
@@ -13,15 +13,17 @@ public abstract class Menu {
 	
 	public abstract void processChoice(int choice);
 
-	@Override
-	public String toString() {
-		String output = title + 
-			"\n===========================\n";
+	public void print() {
+		String itemFormat = "| %-30s |%n";
+		
+		System.out.format("+--------------------------------+%n");
+		System.out.format(itemFormat, title);
+		System.out.format("+--------------------------------+%n");
 		
 		for(String option : options) {
-			output += option + "\n";
+			System.out.format(itemFormat, option);
 		}
 		
-		return output;
+		System.out.format("+--------------------------------+%n\n");
 	}
 }

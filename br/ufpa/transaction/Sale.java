@@ -46,8 +46,13 @@ public class Sale extends Transaction {
 		this.products.add(product);
 	}
 	
-	public void removeProduct(Product product) {
-		this.products.remove(product);
+	public boolean removeProduct(int code) {
+		Product toRemove = products.stream().
+		    filter(p -> p.getCode() == code).
+		    findFirst().
+		    orElse(null);
+		
+		return this.products.remove(toRemove);
 	}
 	
 	public ArrayList<Product> getProducts() {
@@ -67,7 +72,7 @@ public class Sale extends Transaction {
 	@Override
 	public boolean finish() {
 		// Fake successful sale process finish.
-		return !products.isEmpty();
+		return true;
 	}
 
 	@Override
