@@ -23,10 +23,10 @@ public class Sale extends Transaction {
 	}
 	
 	public String getFormattedTotal() {
-		double total = products.stream()
-				.map(i -> i.getPrice())
-				.mapToDouble(Double::valueOf)
-				.sum();
+		double total = 0;
+		for(Product p: products ) {
+			total += p.getPrice();
+		}
 		
 		NumberFormat formatter = NumberFormat.getCurrencyInstance();
 		String formattedTotal = formatter.format(total);
@@ -34,10 +34,10 @@ public class Sale extends Transaction {
 	}
 	
 	public double getTotal() {
-		double total = products.stream()
-				.map(i -> i.getPrice())
-				.mapToDouble(Double::valueOf)
-				.sum();
+		double total = 0;
+		for(Product p: products ) {
+			total += p.getPrice();
+		}
 		
 		return total;
 	}
@@ -47,32 +47,28 @@ public class Sale extends Transaction {
 	}
 	
 	public boolean removeProduct(int code) {
-		Product toRemove = products.stream().
-		    filter(p -> p.getCode() == code).
-		    findFirst().
-		    orElse(null);
 		
-		return this.products.remove(toRemove);
+		ArrayList<Product> rest = new ArrayList<>();
+		for(Product p: products) {
+			if(p.getCode()!= code) {
+				rest.add(p);
+			}
+		}
+		
+		products = rest;
+		return true;
 	}
 	
 	public ArrayList<Product> getProducts() {
 		return products;
 	}
 	
-	public double calculateTotal() {
-		double sum = 0;
-		
-		for(Product product : products) {
-			sum += product.getPrice();
-		}
-		
-		return sum;
-	}
+	
 
 	@Override
 	public boolean finish() {
 		// Fake successful sale process finish.
-		return true;
+		return !products.isEmpty();
 	}
 
 	@Override

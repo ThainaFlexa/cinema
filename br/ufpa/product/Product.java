@@ -9,7 +9,7 @@ public abstract class Product {
 	protected boolean available = true;
 	
 	public Product(int code, double price, String description) {
-		super();
+		//super();
 		this.code = code;
 		this.price = price;
 		this.description = description;
@@ -41,6 +41,8 @@ public abstract class Product {
 		this.available = available;
 	}
 
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -65,9 +67,6 @@ public abstract class Product {
 
 	@Override
 	public String toString() {
-		NumberFormat formatter = NumberFormat.getCurrencyInstance();
-		String formattedPrice = formatter.format(price);
-		
-		return "\t" + code + " - " + description + " -> " + formattedPrice + "\n";
+		return "\t" + code + " - " + description + " -> " + getFormattedPrice() + "\n";
 	}
 }

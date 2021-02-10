@@ -74,7 +74,7 @@ class SaleTest {
 		sale.addProduct(ticket);
 		sale.addProduct(snack);
 		
-		Assertions.assertEquals(sale.calculateTotal(), 50.0);
+		Assertions.assertEquals(sale.getTotal(), 50.0);
 	}
 
 }

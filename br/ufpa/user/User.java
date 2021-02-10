@@ -6,7 +6,7 @@ public abstract class User implements Authenticable {
 	private String password;
 	
 	public User(String name, String login, String password) {
-		super();
+		//super();
 		this.name = name;
 		this.login = login;
 		this.password = password;
